@@ -1,0 +1,73 @@
+
+// Copyright Wintriss Technical Schools 2013
+import java.awt.Component;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
+public class PhotoQuiz {
+	static JFrame quizWindow = new JFrame();
+	static Component photo = new JLabel();
+static int score = 0;
+static JLabel scoreLabel = new JLabel(Integer.toString(score));
+	public static void main(String[] args) throws Exception {
+		
+		
+		
+		
+
+		quizWindow.setVisible(true);
+		quizWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		String answer = addImage_Question("https://www.w3schools.com/css/trolltunga.jpg", "Is there a river in this image?");
+		showResponse(answer);
+	
+		quizWindow.remove(photo);
+		answer = addImage_Question("http://i.imgur.com/RRUe0Mo.png", "Is a body of water in the image?");
+		showResponse(answer);
+		
+		quizWindow.dispose();
+	}
+
+	private static Component createImage(String imageUrl) throws MalformedURLException {
+		System.out.println(imageUrl);
+		URL url = new URL(imageUrl);
+		Icon icon = new ImageIcon(url);
+		JLabel imageLabel = new JLabel(icon);
+		return imageLabel;
+	}
+	private static void setScore(int newScore)
+	{
+		score = newScore;
+		scoreLabel.setText (Integer.toString(score));
+	}
+	
+	private static void showResponse(String answer) {
+		if (answer.equalsIgnoreCase("yes")) {
+			JOptionPane.showMessageDialog(null, "Correct");
+			setScore(score++);
+		} else if (answer.equalsIgnoreCase("no")) {
+			JOptionPane.showMessageDialog(null, "Incorrect");
+		}
+	}
+
+	private static String addImage_Question(String imageURL, String question) {
+		try {
+			photo = createImage(imageURL);
+			quizWindow.add(photo);
+			quizWindow.pack();
+			return JOptionPane.showInputDialog(question);
+		} catch (MalformedURLException e) {
+return "";
+		}
+	}
+	/* OPTIONAL */
+	// *14. add scoring to your quiz
+	// *15. make something happen when mouse enters image
+	// (imageComponent.addMouseMotionListener())
+}
