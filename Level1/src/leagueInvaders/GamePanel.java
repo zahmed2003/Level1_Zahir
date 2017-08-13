@@ -17,8 +17,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
+	
+	int x = 250;
+	
 	Font titleFont;
-	Rocketship rocketship = new Rocketship(250, 700, 50, 50);
+	Rocketship rocket = new Rocketship(x, 700, 50, 50);
 
 	public GamePanel() {
 		Timer timer = new Timer(1000 / 60, this);
@@ -34,7 +37,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void updateGameState() {
-		rocketship.update();
+		rocket.update();
 	}
 
 	public void updateEndState() {
@@ -53,7 +56,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
-		rocketship.draw(g);
+		rocket.draw(g);
 	}
 
 	public void drawEndState(Graphics g) {
@@ -104,13 +107,24 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		System.out.println("key Pressed");
-		if (KeyEvent.VK_ENTER == 10) { // fix so that when enter is pressed the
-										// next code runs
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) { 
+										
 			if (currentState <= 2) {
 				currentState += 1;
 			}
 			if (currentState >= 3) {
 				currentState = MENU_STATE;
+			}
+			
+			if(e.getKeyCode() == KeyEvent.VK_LEFT)
+			{
+				rocket.x -= rocket.speed;
+				rocket.update();
+			}
+			if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+			{
+				rocket.x += rocket.speed;
+				rocket.update();
 			}
 
 		}

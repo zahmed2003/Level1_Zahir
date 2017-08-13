@@ -3,7 +3,7 @@ package leagueInvaders;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Rocketship extends GameObject {
+public class Rocketship extends GameObject{
 	int x;
 	int y;
 	int width;
@@ -23,8 +23,10 @@ public class Rocketship extends GameObject {
 	}
 
 	public void update() {
-
+		
 	}
+
+	
 
 	public void draw(Graphics g) {
 		g.setColor(Color.BLUE);

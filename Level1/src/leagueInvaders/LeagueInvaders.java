@@ -1,8 +1,11 @@
 package leagueInvaders;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JFrame;
 
-public class LeagueInvaders {
+public class LeagueInvaders{
 
 	JFrame frame = new JFrame();
 	final static int width = 500;
