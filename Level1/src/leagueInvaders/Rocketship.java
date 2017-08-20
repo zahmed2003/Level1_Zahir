@@ -22,8 +22,22 @@ public class Rocketship extends GameObject{
 
 	}
 
-	public void update() {
-		
+	public void update() 
+	{
+		keyHandler();
+	}
+	
+	
+	private void keyHandler()
+	{
+		if (InputManager.left_key)
+		{
+			x -= speed;
+		}
+		if (InputManager.right_key)
+		{
+			x += speed;
+		}
 	}
 
 	

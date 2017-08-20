@@ -18,10 +18,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
 	
-	int x = 250;
+	ObjectManager manager = new ObjectManager();
+	
 	
 	Font titleFont;
-	Rocketship rocket = new Rocketship(x, 700, 50, 50);
+	Rocketship rocket = new Rocketship(250, 700, 50, 50);
 
 	public GamePanel() {
 		Timer timer = new Timer(1000 / 60, this);
@@ -29,6 +30,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 															// stylization, size
 
 		this.timer = timer;
+		manager.addObject(rocket);
 
 	}
 
@@ -37,7 +39,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void updateGameState() {
-		rocket.update();
+		manager.update();
 	}
 
 	public void updateEndState() {
@@ -56,7 +58,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void drawGameState(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
-		rocket.draw(g);
+		manager.draw(g);
 	}
 
 	public void drawEndState(Graphics g) {
@@ -106,6 +108,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		int key = e.getKeyCode();
 		System.out.println("key Pressed");
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) { 
 										
@@ -115,24 +118,38 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			if (currentState >= 3) {
 				currentState = MENU_STATE;
 			}
+		}
 			
-			if(e.getKeyCode() == KeyEvent.VK_LEFT)
+			
+		if(key == KeyEvent.VK_LEFT)
 			{
-				rocket.x -= rocket.speed;
-				rocket.update();
+				InputManager.left_key = true;
 			}
-			if(e.getKeyCode() == KeyEvent.VK_RIGHT)
+			if(key == KeyEvent.VK_RIGHT)
 			{
-				rocket.x += rocket.speed;
-				rocket.update();
+				
+				InputManager.right_key = true;
 			}
 
-		}
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		System.out.println("key released");
+		int key = e.getKeyCode();
+		
+		
+		if(key == KeyEvent.VK_LEFT)
+		{
+			
+			InputManager.left_key = false;
+		}
+		if(key == KeyEvent.VK_RIGHT)
+		{
+			
+			InputManager.right_key = false;
+		}
 
 	}
 
