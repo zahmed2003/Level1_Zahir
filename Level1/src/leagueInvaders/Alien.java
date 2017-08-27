@@ -3,14 +3,15 @@ package leagueInvaders;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Projectile extends GameObject {
+public class Alien extends GameObject{
 	int x;
 	int y;
 	int width;
 	int height;
 	int speed;
 
-	public Projectile(int x, int y, int width, int height) {
+	public Alien(int x, int y, int width, int height) {
+
 		super(x, y, width, height);
 		int speed = 10;
 
@@ -25,17 +26,12 @@ public class Projectile extends GameObject {
 	public void update()
 	{
 		super.update();
-		y -= speed;
-		if(y < 0)
-		{
-			isAlive = false;
-		}
-
+		y += speed;
 	}
 	
 	public void draw(Graphics g)
 	{
-		g.setColor(Color.RED);
+		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, width, height);
 	}
 }

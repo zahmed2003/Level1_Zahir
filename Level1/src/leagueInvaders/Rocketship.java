@@ -11,7 +11,7 @@ public class Rocketship extends GameObject{
 	int speed;
 
 	public Rocketship(int x, int y, int width, int height) {
-
+		super(x, y, width, height);
 		int speed = 5;
 
 		this.x = x;
@@ -24,6 +24,7 @@ public class Rocketship extends GameObject{
 
 	public void update() 
 	{
+		super.update();
 		keyHandler();
 	}
 	

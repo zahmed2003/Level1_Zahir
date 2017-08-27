@@ -40,6 +40,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public void updateGameState() {
 		manager.update();
+		manager.manageEnemies();
+		manager.checkCollision();
+		if (rocket.isAlive == false)
+		{
+			currentState = END_STATE;
+		}
 	}
 
 	public void updateEndState() {
@@ -130,7 +136,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				
 				InputManager.right_key = true;
 			}
+		if(key == KeyEvent.VK_SPACE)
+		{
+			manager.addObject(new Projectile(rocket.x + rocket.width/2 - 5, rocket.y, 10, 10));
 
+		}
 		
 	}
 
