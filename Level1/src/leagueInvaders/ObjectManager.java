@@ -58,12 +58,13 @@ public class ObjectManager {
 				GameObject o1 = objects.get(i);
 				GameObject o2 = objects.get(j);
 				
-				if(o1.collisionBox.intersects(o2.collisionBox)){
-					o1.setColliding = true;
-					o1.setCollidingObject(o2);
+				if(o1.colBox.intersects(o2.colBox)){
+					System.out.println(o2 + " " + o1);
+					o1.setColliding(true);
+					o1.setCollisionObject(o2);
 					
-					o2.setColliding = true;
-					o2.setCollidingObject(o1);
+					o2.setColliding(true);
+					o2.setCollisionObject(o1);
 				}
 			}
 		}

@@ -4,29 +4,27 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Alien extends GameObject{
-	int x;
-	int y;
-	int width;
-	int height;
-	int speed;
+	
+	int ctr = 0;
 
 	public Alien(int x, int y, int width, int height) {
 
 		super(x, y, width, height);
-		int speed = 10;
 
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.speed = speed;
+
 
 	}
 	
 	public void update()
 	{
-		super.update();
-		y += speed;
+		
+		y += 5;
+		if(isColliding && collisionObject instanceof Projectile)
+		{
+			isAlive = false;
+		}
+		
+		colBox.setBounds(x, y, width, height);
 	}
 	
 	public void draw(Graphics g)
@@ -34,4 +32,5 @@ public class Alien extends GameObject{
 		g.setColor(Color.YELLOW);
 		g.fillRect(x, y, width, height);
 	}
+	
 }

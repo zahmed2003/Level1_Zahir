@@ -7,7 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -17,6 +20,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
+	
+	public static BufferedImage alienImg;
+	public static BufferedImage rocketImg;
+	public static BufferedImage bulletImg;
+
+
 	
 	ObjectManager manager = new ObjectManager();
 	
@@ -31,6 +40,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		this.timer = timer;
 		manager.addObject(rocket);
+		
+		try {
+			alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
+			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+			bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
 
 	}
 
@@ -45,7 +65,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (rocket.isAlive == false)
 		{
 			currentState = END_STATE;
+			rocket.isAlive = true;
+			manager.reset();
+			this.rocket = new Rocketship(250, 700, 50, 50);
+			manager.addObject(rocket);
 		}
+		
+		
+		manager.getScore();
 	}
 
 	public void updateEndState() {
@@ -118,8 +145,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		System.out.println("key Pressed");
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) { 
 										
-			if (currentState <= 2) {
+			if (currentState < 2) {
 				currentState += 1;
+			}
+			if (currentState == 2)
+			{
+				currentState = GAME_STATE;
 			}
 			if (currentState >= 3) {
 				currentState = MENU_STATE;

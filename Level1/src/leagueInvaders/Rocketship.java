@@ -2,30 +2,33 @@ package leagueInvaders;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class Rocketship extends GameObject{
-	int x;
-	int y;
-	int width;
-	int height;
-	int speed;
+	boolean canFire;
+	
+	ObjectManager objManager;
 
 	public Rocketship(int x, int y, int width, int height) {
 		super(x, y, width, height);
-		int speed = 5;
+		speed = 5;
 
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
-		this.speed = speed;
+		canFire = true;
+		
+		colBox = new Rectangle(x - (width/2), y - (height/2), width, height);
 
 	}
 
 	public void update() 
 	{
-		super.update();
 		keyHandler();
+		
+		if(isColliding && collisionObject instanceof Alien)
+		{
+			isAlive = false;
+		}
+		
+		colBox.setBounds(x, y, width, height);
 	}
 	
 	
@@ -39,13 +42,26 @@ public class Rocketship extends GameObject{
 		{
 			x += speed;
 		}
+		if(InputManager.space_key && canFire)
+		{
+			objManager.addObject(new Projectile(x + (width/2), y, 6, 15));
+			canFire = false;
+			
+		}
+		if(!InputManager.space_key)
+		{
+			canFire = true;
+		}
+		
+	}
+	public void setObjectManager(ObjectManager o)
+	{
+		objManager = o;
 	}
 
 	
 
 	public void draw(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(x, y, width, height);
-
+		g.drawImage(GamePanel.rocketImg, x, y, width, height, null);
 	}
 }
