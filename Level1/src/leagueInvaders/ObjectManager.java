@@ -47,7 +47,7 @@ public class ObjectManager {
 
 	public void manageEnemies(){
 		if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
-			addObject(new Alien(new Random().nextInt(LeagueInvaders.width), 0, 50, 50));
+			addObject(new Alien(new Random().nextInt(LeagueInvaders.width - 50) + 50, 0, 50, 50, new Random().nextInt(5) + 5));
 			enemyTimer = System.currentTimeMillis();
 		}
 	}
@@ -59,12 +59,16 @@ public class ObjectManager {
 				GameObject o2 = objects.get(j);
 				
 				if(o1.colBox.intersects(o2.colBox)){
-					System.out.println(o2 + " " + o1);
 					o1.setColliding(true);
 					o1.setCollisionObject(o2);
 					
 					o2.setColliding(true);
 					o2.setCollisionObject(o1);
+					
+					if(o1 instanceof Projectile && o2 instanceof Alien || o2 instanceof Projectile && o1 instanceof Alien) 
+					{
+						score++;
+					}
 				}
 			}
 		}

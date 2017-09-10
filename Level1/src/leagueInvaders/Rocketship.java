@@ -1,8 +1,11 @@
 package leagueInvaders;
 
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+
+import javax.swing.JApplet;
 
 public class Rocketship extends GameObject{
 	boolean canFire;
@@ -53,6 +56,15 @@ public class Rocketship extends GameObject{
 			canFire = true;
 		}
 		
+		if(x < 0)
+		{
+			x=0;
+		}
+		if(x > 500 - width)
+		{
+			x=500 - width;
+		}
+		
 	}
 	public void setObjectManager(ObjectManager o)
 	{
@@ -64,4 +76,5 @@ public class Rocketship extends GameObject{
 	public void draw(Graphics g) {
 		g.drawImage(GamePanel.rocketImg, x, y, width, height, null);
 	}
+	
 }

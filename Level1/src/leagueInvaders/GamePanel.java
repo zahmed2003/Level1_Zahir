@@ -1,5 +1,6 @@
 package leagueInvaders;
 
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -11,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JApplet;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -24,6 +26,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage alienImg;
 	public static BufferedImage rocketImg;
 	public static BufferedImage bulletImg;
+	public static BufferedImage backImg;
 
 
 	
@@ -41,12 +44,14 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		this.timer = timer;
 		manager.addObject(rocket);
 		
-		try {
+		try 
+		{
 			alienImg = ImageIO.read(this.getClass().getResourceAsStream("alien.png"));
 			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
 			bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			backImg = ImageIO.read(this.getClass().getResourceAsStream("back.jpeg"));
+		} 
+		catch (IOException e) {
 			e.printStackTrace();
 		}
 
@@ -89,8 +94,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void drawGameState(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, LeagueInvaders.width, LeagueInvaders.height);
+		g.drawImage(GamePanel.backImg,0, 0, LeagueInvaders.width, LeagueInvaders.height, null);
 		manager.draw(g);
 	}
 
@@ -100,6 +104,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		g.setFont(titleFont);
 		g.drawString("text", 10, 10); // change the 10s into other values
+		
+		System.out.println(manager.getScore());
+	
 	}
 
 	@Override
@@ -135,14 +142,12 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		System.out.println("key typed");
 
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
-		System.out.println("key Pressed");
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) { 
 										
 			if (currentState < 2) {
@@ -177,7 +182,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		System.out.println("key released");
 		int key = e.getKeyCode();
 		
 		
