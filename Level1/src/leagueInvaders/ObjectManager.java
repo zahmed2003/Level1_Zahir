@@ -11,7 +11,7 @@ public class ObjectManager {
 	private int score = 0;
 	
 	long enemyTimer = 0;
-	int enemySpawnTime = 1000;
+	int enemySpawnTime = 500;
 	
 	public ObjectManager() {
 		objects = new ArrayList<GameObject>();
@@ -46,9 +46,23 @@ public class ObjectManager {
 	}
 
 	public void manageEnemies(){
+		
+		Random r = new Random();
+		int enemy = r.nextInt(2);
+		
 		if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
+			
+			if(enemy == 1)
+			{
 			addObject(new Alien(new Random().nextInt(LeagueInvaders.width - 50) + 50, 0, 50, 50, new Random().nextInt(5) + 5));
 			enemyTimer = System.currentTimeMillis();
+			}
+			if(enemy == 0)
+			{
+				addObject(new Alien2(0, new Random().nextInt(550) + 50, 50, 50, new Random().nextInt(5) + 5));
+				enemyTimer = System.currentTimeMillis();
+				
+			}
 		}
 	}
 
@@ -65,7 +79,7 @@ public class ObjectManager {
 					o2.setColliding(true);
 					o2.setCollisionObject(o1);
 					
-					if(o1 instanceof Projectile && o2 instanceof Alien || o2 instanceof Projectile && o1 instanceof Alien) 
+					if(o1 instanceof Projectile && o2 instanceof Alien || o2 instanceof Projectile && o1 instanceof Alien || o1 instanceof Projectile && o2 instanceof Alien2 || o2 instanceof Projectile && o1 instanceof Alien2) 
 					{
 						score++;
 					}

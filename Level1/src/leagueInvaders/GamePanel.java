@@ -27,10 +27,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage rocketImg;
 	public static BufferedImage bulletImg;
 	public static BufferedImage backImg;
+	public static BufferedImage AlienBulletImg;
 
 
 	
-	ObjectManager manager = new ObjectManager();
+	static ObjectManager manager = new ObjectManager();
 	
 	
 	Font titleFont;
@@ -96,6 +97,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void drawGameState(Graphics g) {
 		g.drawImage(GamePanel.backImg,0, 0, LeagueInvaders.width, LeagueInvaders.height, null);
 		manager.draw(g);
+		g.drawString(Integer.toString(manager.getScore()), 10, 10);
 	}
 
 	public void drawEndState(Graphics g) {

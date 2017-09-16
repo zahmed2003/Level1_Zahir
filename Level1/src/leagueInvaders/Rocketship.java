@@ -26,7 +26,7 @@ public class Rocketship extends GameObject{
 	{
 		keyHandler();
 		
-		if(isColliding && collisionObject instanceof Alien)
+		if(isColliding && collisionObject instanceof Alien || isColliding && collisionObject instanceof Alien2 || isColliding && collisionObject instanceof AlienProjectile)
 		{
 			isAlive = false;
 		}

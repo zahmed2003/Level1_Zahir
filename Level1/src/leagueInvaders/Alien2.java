@@ -7,54 +7,50 @@ import java.util.Random;
 
 import javax.swing.JApplet;
 
-public class Alien extends GameObject{
+public class Alien2 extends GameObject{
 	
 	int ctr = 0;
 	int speed;
-	Random r = new Random();
-	int health = r.nextInt(2) + 1;
 	int counter = 0;
 
-	public Alien(int x, int y, int width, int height, int speed) {
+	public Alien2(int x, int y, int width, int height, int speed) {
 
 		
 		super(x, y, width, height);
 		
-		int health = r.nextInt(2) + 1;
-		this.health = health;
+
 		this.speed = speed;
-
-
-
+		
 	}
 	
 	public void update()
 	{
-		counter++;
-		if(counter % 60 == 0)
-		{
-		GamePanel.manager.addObject(new AlienProjectile(x + (width/2), y + (width/2), 6, 15));
-		}
-		y += speed;
+			counter ++;
+			x += speed;
+			if(counter % 20 == 0)
+			{
+			GamePanel.manager.addObject(new AlienProjectile(x + (width/2), y, 6, 15));
+			}
+			
+		
 		if(isColliding && collisionObject instanceof Projectile)
 		{
-			if(health > 0)
-				{
-					health = health - 1;
-				}
-			if(health == 0)
-				{
+			
 				isAlive = false;
-				}
 		}
-		
-		
+	
 		colBox.setBounds(x, y, width, height);
+	
 	}
+	
+	
+	
 	
 	public void draw(Graphics g)
 	{
 		g.drawImage(GamePanel.alienImg, x, y, width, height, null);
 	}
 	
-}
+	}
+	
+

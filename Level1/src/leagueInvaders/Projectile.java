@@ -33,6 +33,15 @@ public class Projectile extends GameObject {
 		colBox.setBounds(x, y, width, height);
 		prevX = x;
 		prevY = y;
+		
+		if(isColliding && collisionObject instanceof Alien2)
+		{
+			isAlive = false;
+		}
+		
+		colBox.setBounds(x, y, width, height);
+		prevX = x;
+		prevY = y;
 	}
 	
 	public void draw(Graphics g)
