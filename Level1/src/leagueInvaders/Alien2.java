@@ -27,7 +27,7 @@ public class Alien2 extends GameObject{
 	{
 			counter ++;
 			x += speed;
-			if(counter % 20 == 0)
+			if(counter % 30 == 0)
 			{
 			GamePanel.manager.addObject(new AlienProjectile(x + (width/2), y, 6, 15));
 			}

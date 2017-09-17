@@ -8,15 +8,15 @@ import java.util.Random;
 public class ObjectManager {
 	ArrayList<GameObject> objects;
 	
-	private int score = 0;
+	int score = 0;
 	
 	long enemyTimer = 0;
-	int enemySpawnTime = 500;
+	int enemySpawnTime = 1;
 	
 	public ObjectManager() {
 		objects = new ArrayList<GameObject>();
 	}
-
+   
 	public void addObject(GameObject o) {
 		objects.add(o);
 	}
@@ -59,7 +59,7 @@ public class ObjectManager {
 			}
 			if(enemy == 0)
 			{
-				addObject(new Alien2(0, new Random().nextInt(550) + 50, 50, 50, new Random().nextInt(5) + 5));
+				addObject(new Alien2(0, new Random().nextInt(500) + 50, 50, 50, new Random().nextInt(5) + 5));
 				enemyTimer = System.currentTimeMillis();
 				
 			}

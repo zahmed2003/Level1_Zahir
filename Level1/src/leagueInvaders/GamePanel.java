@@ -51,6 +51,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
 			bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
 			backImg = ImageIO.read(this.getClass().getResourceAsStream("back.jpeg"));
+			AlienBulletImg = ImageIO.read(this.getClass().getResourceAsStream("AlienBullet.png"));
 		} 
 		catch (IOException e) {
 			e.printStackTrace();
@@ -75,10 +76,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			manager.reset();
 			this.rocket = new Rocketship(250, 700, 50, 50);
 			manager.addObject(rocket);
+			
 		}
+		System.out.println(manager.getScore());
 		
 		
-		manager.getScore();
 	}
 
 	public void updateEndState() {
@@ -91,6 +93,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 		g.setFont(titleFont);
 		g.drawString("text", 10, 10); // change the 10s into other values
+		
 
 	}
 
@@ -98,6 +101,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawImage(GamePanel.backImg,0, 0, LeagueInvaders.width, LeagueInvaders.height, null);
 		manager.draw(g);
 		g.drawString(Integer.toString(manager.getScore()), 10, 10);
+		
 	}
 
 	public void drawEndState(Graphics g) {
@@ -107,7 +111,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(titleFont);
 		g.drawString("text", 10, 10); // change the 10s into other values
 		
-		System.out.println(manager.getScore());
+		manager.score = 0;
 	
 	}
 
