@@ -45,6 +45,15 @@ public class Rocketship extends GameObject{
 		{
 			x += speed;
 		}
+		if (InputManager.up_key)
+		{
+			y -= speed;
+		}
+		if (InputManager.down_key)
+		{
+			y += speed;
+		}
+		
 		if(InputManager.space_key && canFire)
 		{
 			objManager.addObject(new Projectile(x + (width/2), y, 6, 15));
@@ -64,6 +73,7 @@ public class Rocketship extends GameObject{
 		{
 			x=500 - width;
 		}
+		
 		
 	}
 	public void setObjectManager(ObjectManager o)

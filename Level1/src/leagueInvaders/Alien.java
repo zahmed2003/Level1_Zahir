@@ -12,15 +12,15 @@ public class Alien extends GameObject{
 	int ctr = 0;
 	int speed;
 	Random r = new Random();
-	int health = r.nextInt(2) + 1;
+	int health;
 	int counter = 0;
 
-	public Alien(int x, int y, int width, int height, int speed) {
+	public Alien(int x, int y, int width, int height, int speed, int health) {
 
 		
 		super(x, y, width, height);
 		
-		int health = r.nextInt(2) + 1;
+		this.health = health;
 		this.health = health;
 		this.speed = speed;
 
@@ -31,7 +31,7 @@ public class Alien extends GameObject{
 	public void update()
 	{
 		counter++;
-		if(counter % 60 == 0)
+		if(counter % 1 == 0)
 		{
 		GamePanel.manager.addObject(new AlienProjectile(x + (width/2), y + (width/2), 6, 15));
 		}

@@ -11,7 +11,7 @@ public class ObjectManager {
 	int score = 0;
 	
 	long enemyTimer = 0;
-	int enemySpawnTime = 1;
+	int enemySpawnTime = 500;
 	
 	public ObjectManager() {
 		objects = new ArrayList<GameObject>();
@@ -54,7 +54,7 @@ public class ObjectManager {
 			
 			if(enemy == 1)
 			{
-			addObject(new Alien(new Random().nextInt(LeagueInvaders.width - 50) + 50, 0, 50, 50, new Random().nextInt(5) + 5));
+			addObject(new Alien(new Random().nextInt(LeagueInvaders.width - 50) + 50, 0, 50, 50, new Random().nextInt(5) + 5, new Random().nextInt(1) + 1));
 			enemyTimer = System.currentTimeMillis();
 			}
 			if(enemy == 0)

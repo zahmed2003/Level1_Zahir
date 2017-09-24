@@ -12,14 +12,15 @@ public class Alien2 extends GameObject{
 	int ctr = 0;
 	int speed;
 	int counter = 0;
+	int x;
 
 	public Alien2(int x, int y, int width, int height, int speed) {
 
 		
 		super(x, y, width, height);
 		
-
 		this.speed = speed;
+		this.x = x;
 		
 	}
 	
@@ -27,10 +28,11 @@ public class Alien2 extends GameObject{
 	{
 			counter ++;
 			x += speed;
-			if(counter % 30 == 0)
+			if(counter % 30 == 0 || x == 10)
 			{
 			GamePanel.manager.addObject(new AlienProjectile(x + (width/2), y, 6, 15));
 			}
+			
 			
 		
 		if(isColliding && collisionObject instanceof Projectile)
